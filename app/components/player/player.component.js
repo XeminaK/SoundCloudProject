@@ -2,7 +2,7 @@
 
 const player = {
   templateUrl: "app/components/player/player.html",
-  controller: ["ProjectService", function (ProjectService) {
+  controller: [function () {
     const vm = this;
 
     SC.get('/tracks', {
