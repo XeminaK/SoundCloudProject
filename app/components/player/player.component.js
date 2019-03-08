@@ -2,8 +2,14 @@
 
 const player = {
   templateUrl: "app/components/player/player.html",
-  controller: [function () {
+  controller: ["NavigateService", function(NavigateService) {
     const vm = this;
+    vm.goBack = function() {
+      NavigateService.toHome();
+    }
+    vm.settings = function() {
+      NavigateService.toSettings();
+    }
   }]
 }
 
