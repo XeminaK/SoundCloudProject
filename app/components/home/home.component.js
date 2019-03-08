@@ -2,7 +2,7 @@
 
 const home = {
   templateUrl: "app/components/home/home.html",
-  controller: [function () {
+  controller: ["NavigateService", function(NavigateService) {
     const vm = this;
     vm.currentTrack = 0;
    
@@ -46,7 +46,9 @@ const home = {
         vm.play = true;
       }
     }
-    
+    vm.newPlaylist = function() {
+      NavigateService.toSettings();
+    }
   }]
 }
 
