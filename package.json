@@ -1,0 +1,24 @@
+{
+  "name": "soundcloudproject",
+  "version": "1.0.0",
+  "description": "This is our final project for Demo Day!!!!",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XeminaK/SoundCloudProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XeminaK/SoundCloudProject/issues"
+  },
+  "homepage": "https://github.com/XeminaK/SoundCloudProject#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "pg": "^7.8.2"
+  }
+}
