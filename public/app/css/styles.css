@@ -1,0 +1,95 @@
+body, html {
+  margin: 0 auto;
+  overflow: scroll;
+}
+
+header {
+  margin-bottom: 50px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  background-color: #212121;
+}
+
+.logo {
+  height: 30px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.new_playlist {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  padding: 10px 15px;
+  right: 10px;
+  background-color: #E65100;
+  border: none;
+  outline: none;
+  border-radius: 2.5px;
+  cursor: pointer;
+}
+
+.fa-plus {
+  padding-right: 5px;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  background-color: #212121;
+  height: 100px;
+}
+
+.album_art_container {
+  height: 100px;
+}
+
+.album_art {
+  height: 100px;
+}
+
+.fa-play, .fa-pause, .fa-forward {
+  color: #E65100; 
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 25px;
+  max-width: 300px;
+}
+
+.artist_info_container {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.artist_info {
+  color: white;
+}
+
+.wrapper p {
+  position: absolute;
+  margin: 0;
+  line-height: 25px;
+  white-space: nowrap;
+  animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  50% { transform: translateX(-40%); }
+  80% { transform: translateX(0%); }
+  100% { transform: translateX(0%); }
+}
