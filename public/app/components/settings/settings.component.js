@@ -11,14 +11,16 @@ const settings = {
         }
         
         vm.submit = function(playlist) {
-            vm.convertTags();
-            ApiService.checkKeywords(vm.tagsArray);
+            vm.convertTags(playlist);
+            playlist.tags = vm.tagsArray;
+            ApiService.setPlaylist(playlist);
         }
         
-        vm.convertTags = function() {
+        vm.convertTags = function(playlist) {
             for (let i = 0; i < playlist.tags.length; i++) {
-                vm.tagsArray.push(playlist.tags[i].name)
+                vm.tagsArray.push(playlist.tags[i].text)
             }
+
         }
     }]
 
