@@ -2,14 +2,16 @@
 
 const home = {
   templateUrl: "app/components/home/home.html",
-  controller: ["NavigateService", "PlayerService", "$rootScope", function (NavigateService, PlayerService, $rootScope) {
+  controller: ["NavigateService", "PlayerService", "$rootScope", "ApiService", function (NavigateService, PlayerService, $rootScope, ApiService) {
     const vm = this;
     vm.startedMusic = false
 
     vm.$onInit = function () {
       vm.startedMusic = PlayerService.checkMusic();
-      PlayerService.checkKeywords()
-    }
+      ApiService.getPlaylists().then(function (result) {
+        PlayerService.setData(result.data);
+      });
+    };
 
     vm.startRadio = function () {
       PlayerService.startRadio();

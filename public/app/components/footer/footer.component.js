@@ -2,7 +2,7 @@
 
 const footerComponent = {
   templateUrl: "app/components/footer/footer.html",
-  controller: ["PlayerService", "$rootScope", "$timeout", function(PlayerService, $rootScope, $timeout) {
+  controller: ["PlayerService", "$rootScope", "$timeout", "ApiService", function(PlayerService, $rootScope, $timeout, ApiService) {
     const vm = this;
     vm.currentTrack = 0;
     vm.time = 0;  // the time elapsed

@@ -2,6 +2,7 @@
 
 function PlayerService($timeout) {
     const self = this;
+
     self.currentTrack = 0;
     self.keyword = 'techno'
     self.startedMusic = false;
@@ -12,23 +13,11 @@ function PlayerService($timeout) {
     self.mytimeout = null; // timer itself
     self.stopped = null; // boolean
     self.activeTimer = false; // checks if there is an active timer in service.  
-
-    self.checkKeywords = function () {
-        for (let i = 0; i < self.newKeywords.length; i++) {
-            self.getTracks(self.newKeywords[i])
-        }
+    self.setData = function (data) {
+        self.data = data;
+        console.log(self.data);
     }
-
-    self.getTracks = function (keyword) {
-        SC.get('/tracks', {
-            q: `${keyword}`, limit: 25
-        }).then(function (tracks) {
-            self.tracks = self.tracks.concat(tracks)
-        });
-    }
-
-
-
+    
     self.nextTrack = function () {
         self.currentTrack++;
         SC.stream(`/tracks/${self.tracks[self.currentTrack].id}`).then(function (player) {
