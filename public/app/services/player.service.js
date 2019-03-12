@@ -1,18 +1,22 @@
 "use strict";
 
-function PlayerService() {
+function PlayerService($timeout) {
     const self = this;
     self.currentTrack = 0;
     self.keyword = 'techno'
     self.startedMusic = false;
-    self.newKeywords = ['techno', 'edm', 'taylor swift']
+    self.newKeywords = ['taylor swift']
     // self.databaseKeywords = ['techno', 'dogblood', 'edm']
     self.tracks = []
+    self.time = 0; // time elapsed
+    self.mytimeout = null; // timer itself
+    self.stopped = null; // boolean
+    self.activeTimer = false; // checks if there is an active timer in service.  
 
     self.checkKeywords = function () {
         for (let i = 0; i < self.newKeywords.length; i++) {
             self.getTracks(self.newKeywords[i])
-        } 
+        }
     }
 
     self.getTracks = function (keyword) {
@@ -23,15 +27,18 @@ function PlayerService() {
         });
     }
 
+
+
     self.nextTrack = function () {
         self.currentTrack++;
         SC.stream(`/tracks/${self.tracks[self.currentTrack].id}`).then(function (player) {
             self.player = player;
             player.play();
             self.play = true;
-            self.player.on('finish', function () {
-                self.nextTrack()
-            })
+            // self.player.on('finish', function () {
+            //     self.nextTrack()
+            // })
+            self.nextTimer();
         });
     }
 
@@ -41,9 +48,9 @@ function PlayerService() {
             player.play();
             self.startedMusic = true;
             console.log(self.tracks)
-            self.player.on('finish', function () {
-                self.nextTrack()
-            })
+            // self.player.on('finish', function () {
+            //     self.nextTrack()
+            // })
         });
         self.play = true;
     }
@@ -52,10 +59,12 @@ function PlayerService() {
         if (self.play) {
             self.player.pause();
             self.play = false;
+            self.pauseTimer();
             return self.play;
         } else {
             self.player.play();
             self.play = true;
+            self.startTimer()
             return self.play;
         }
     }
@@ -74,6 +83,41 @@ function PlayerService() {
 
     self.checkMusic = function () {
         return self.startedMusic;
+    }
+
+    self.startTimer = function () {
+        console.log("service started")
+        self.time++;
+        //logic
+        if (self.time < self.tracks[self.currentTrack].duration/1000 ) {
+            console.log(self.time)
+            self.stopped = false;
+            self.activeTimer = true;
+            self.mytimeout = $timeout(self.startTimer, 1000);
+        } else {
+            self.nextTrack();
+        }
+    }
+
+    self.pauseTimer = function () {
+        console.log("paused")
+        $timeout.cancel(self.mytimeout);
+        self.stopped = true;
+        self.activeTimer = false
+    }
+
+    self.nextTimer = function () {
+        self.time = 0;
+        $timeout.cancel(self.mytimeout);
+        self.mytimeout = $timeout(self.startTimer, 1000);
+    }
+
+    self.getTime = function() {
+        return self.time;
+    }
+
+    self.checkTimer = function() {
+        return self.activeTimer;
     }
 }
 
