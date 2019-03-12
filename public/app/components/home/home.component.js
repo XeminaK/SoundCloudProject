@@ -14,6 +14,7 @@ const home = {
     vm.startRadio = function () {
       PlayerService.startRadio();
       $rootScope.$broadcast('play', PlayerService.play);
+      $rootScope.$broadcast('finish', PlayerService.play);
       vm.startedMusic = true;
     }
 

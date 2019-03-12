@@ -1,10 +1,9 @@
 "use strict";
-
 const footerComponent = {
   templateUrl: "app/components/footer/footer.html",
   controller: ["PlayerService", "$rootScope", function(PlayerService, $rootScope) {
     const vm = this;
-    vm.currentTrack = 0;
+    vm.currentTrack = PlayerService.currentTrack;
 
     vm.$onInit = function() {
       vm.tracks = PlayerService.tracks; 
@@ -27,7 +26,11 @@ const footerComponent = {
       console.log("test");
       PlayerService.setDefaultImage();
       vm.tracks = PlayerService.tracks;
-      vm.currentTrack = 0;
+      vm.currentTrack;
+    })
+
+    $rootScope.$on("finish", function(event, data) {
+      PlayerService.nextTrack();
     })
 
   }]
