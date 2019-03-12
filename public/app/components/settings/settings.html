@@ -1,3 +1,18 @@
 <header></header>
 <p>SETTINGS PAGE</p>
 <button ng-click="$ctrl.goBack()">Go Back</button>
+
+<form ng-submit="$ctrl.submit($ctrl.Playlist)">
+<input type="text" placeholder="Categories" ng-model="$ctrl.Playlist.category">
+<input type="text" placeholder="Name" ng-model="$ctrl.Playlist.name"> 
+<tags-input ng-model="$ctrl.Playlist.tags"></tags-input>
+<!-- <p>Model: {{$ctrl.Playlist.tags}}</p> -->
+<button>Save</button>
+
+</form>
+
+
+
+
+
+
