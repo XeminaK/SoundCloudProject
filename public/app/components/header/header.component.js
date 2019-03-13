@@ -2,7 +2,7 @@
 
 const header = {
   templateUrl: "app/components/header/header.html",
-  controller: ["NavigateService", function(NavigateService) {
+  controller: ["NavigateService", "PlayerService", function(NavigateService, PlayerService) {
     const vm = this;
 
     vm.goHome = function() {
@@ -10,8 +10,10 @@ const header = {
     }
 
     vm.newPlaylist = function () {
+      PlayerService.createMode = true;
       NavigateService.toSettings();
     }
+
   }]
 }
 

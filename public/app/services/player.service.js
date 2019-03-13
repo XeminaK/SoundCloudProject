@@ -13,6 +13,7 @@ function PlayerService($timeout) {
     self.mytimeout = null; // timer itself
     self.stopped = null; // boolean
     self.activeTimer = false; // checks if there is an active timer in service.
+    self.createMode = null;
 
     self.setData = function (data) {
         self.tracks = data;
@@ -116,6 +117,10 @@ function PlayerService($timeout) {
 
     self.checkTimer = function() {
         return self.activeTimer;
+    }
+
+    self.checkMode = function() {
+        return self.createMode;
     }
 }
 

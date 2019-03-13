@@ -10,12 +10,16 @@ const player = {
     vm.time = 0;  // the time elapsed
     vm.mytimeout = null; // timer itself
     vm.stopped = null; // boolean that turns timer on/off
+
     vm.goBack = function () {
       NavigateService.toHome();
     }
+
     vm.settings = function () {
+      PlayerService.createMode = false;
       NavigateService.toSettings();
     }
+
     vm.$onInit = function () {
       vm.tracks = PlayerService.tracks;
       vm.currentTrack = PlayerService.currentTrack;
