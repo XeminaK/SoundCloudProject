@@ -4,7 +4,8 @@
   </div>
   <div class="artist_info_container">
     <div class="wrapper">
-      <p class="artist_info">{{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].title}} </p>
+      <p class="artist_info" ng-click="$ctrl.goToPlayer()">{{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].title}} </p>
+
     </div>
     <p class="artist_info">{{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].user.username}}</p>
   </div>

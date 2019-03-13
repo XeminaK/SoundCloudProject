@@ -2,3 +2,14 @@
 <p>PLAYER PAGE</p>
 <button ng-click="$ctrl.goBack()">Go Back to Home</button>
 <button ng-click="$ctrl.settings()">Settings</button>
+<img src="{{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].artwork_url}}" alt="album art">
+<p> {{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].title}} </p>
+<p> {{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].user.username}}</p>
+<div class="controls" ng-show="!$ctrl.play">
+    <i class="fas fa-play" ng-click="$ctrl.togglePlay()"></i>
+    <i class="fas fa-forward" ng-click="$ctrl.nextTrack()"></i>
+  </div>
+  <div class="controls" ng-show="$ctrl.play">
+    <i class="fas fa-pause" ng-click="$ctrl.togglePlay()"></i>
+    <i class="fas fa-forward" ng-click="$ctrl.nextTrack()"></i>
+  </div>

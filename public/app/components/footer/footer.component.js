@@ -2,8 +2,9 @@
 
 const footerComponent = {
   templateUrl: "app/components/footer/footer.html",
-  controller: ["PlayerService", "$rootScope", "$timeout", "ApiService", function(PlayerService, $rootScope, $timeout, ApiService) {
+  controller: ["PlayerService", "$rootScope", "$timeout", "ApiService", "NavigateService", function(PlayerService, $rootScope, $timeout, ApiService, NavigateService) {
     const vm = this;
+    vm.playlistIndex = 0;
     vm.currentTrack = 0;
     vm.time = 0;  // the time elapsed
     vm.mytimeout = null; // timer itself
@@ -23,6 +24,7 @@ const footerComponent = {
     }
 
     vm.$onDestroy = function() {
+      console.log("footer destroyed")
       $timeout.cancel(vm.mytimeout);
     }
 
@@ -48,8 +50,11 @@ const footerComponent = {
       vm.play = true;
       PlayerService.setDefaultImage();
       vm.tracks = PlayerService.tracks;
+      console.log(vm.tracks)
       vm.currentTrack = 0;
       vm.playlistIndex = PlayerService.playlistIndex
+      $timeout.cancel(vm.mytimeout);
+      vm.time = 0;
       vm.startTimer();
       PlayerService.startTimer()
     })
@@ -63,19 +68,27 @@ const footerComponent = {
             vm.mytimeout = $timeout(vm.startTimer, 1000);
         } else {
             vm.currentTrack++;
+            $timeout.cancel(vm.mytimeout); // new
             vm.mytimeout = $timeout(vm.startTimer, 1000);
         }
     }
 
     vm.pauseTimer = function () {
+      console.log("paused timers")
         $timeout.cancel(vm.mytimeout);
         vm.stopped = true;
     }
 
     vm.nextTimer = function () {
+        console.log("stopped timer in footer")
         vm.time = 0;
         $timeout.cancel(vm.mytimeout);
         vm.mytimeout = $timeout(vm.startTimer, 1000);
+    }
+    vm.goToPlayer = function() {
+      console.log("timer footer canceled")
+      $timeout.cancel(vm.mytimeout);
+      NavigateService.toPlayer();
     }
   }]
 }

@@ -19,6 +19,8 @@ function PlayerService($timeout) {
     }
     
     self.nextTrack = function () {
+        self.clearInterval()
+        console.log("stopped timer in player")
         self.currentTrack++;
         SC.stream(`/tracks/${self.tracks[self.playlistIndex].data.data[self.currentTrack].id}`).then(function (player) {
             self.player = player;
@@ -32,7 +34,8 @@ function PlayerService($timeout) {
     }
 
     self.startRadio = function (playlistIndex) {
-        self.playlistIndex = playlistIndex
+        self.playlistIndex = playlistIndex;
+        self.currentTrack = 0;
         SC.stream(`/tracks/${self.tracks[self.playlistIndex].data.data[self.currentTrack].id}`).then(function (player) {
             self.player = player;
             player.play();
@@ -100,7 +103,10 @@ function PlayerService($timeout) {
         $timeout.cancel(self.mytimeout);
         self.mytimeout = $timeout(self.startTimer, 1000);
     }
-
+    self.clearInterval = function() {
+        $timeout.cancel(self.mytimeout);
+        self.time = 0;
+    }
     self.getTime = function() {
         return self.time;
     }

@@ -10,8 +10,11 @@ const home = {
       vm.startedMusic = PlayerService.checkMusic();
       ApiService.getPlaylists().then(function (result) {
         PlayerService.setData(result.data);
+        vm.playlists = result.data;
+        console.log(vm.playlists);
       });
     };
+    
 
     // todo: nested ng-repeat 
 
@@ -31,6 +34,7 @@ const home = {
     // todo: pass playlist index
 
     vm.startRadio = function (index) {
+      PlayerService.clearInterval();
       PlayerService.startRadio(index);
       $rootScope.$broadcast('play', PlayerService.play);
       vm.startedMusic = true;
