@@ -14,8 +14,11 @@ const footerComponent = {
       vm.tracks = PlayerService.tracks; 
       vm.currentTrack = PlayerService.currentTrack;
       vm.play = PlayerService.getPlayStatus();
+      console.log("Timeout canceled on init")
       vm.time = PlayerService.getTime();
       vm.playlistIndex = PlayerService.playlistIndex;
+      $timeout.cancel(vm.mytimeout)
+      console.log(PlayerService.checkTimer())
       if (PlayerService.checkTimer()) {
         vm.startTimer()
       } else if (PlayerService.checkTimer() === false) {
@@ -37,8 +40,9 @@ const footerComponent = {
     
     vm.togglePlay = function() {
       vm.play = PlayerService.togglePlay();
-      if(vm.stopped) {
+      if(vm.play) {
         console.log("play");
+        $timeout.cancel(vm.mytimeout)
         vm.startTimer();
       } else {
         console.log("pause");
@@ -54,6 +58,7 @@ const footerComponent = {
       vm.currentTrack = 0;
       vm.playlistIndex = PlayerService.playlistIndex
       $timeout.cancel(vm.mytimeout);
+      PlayerService.clearInterval();
       vm.time = 0;
       vm.startTimer();
       PlayerService.startTimer()
@@ -65,6 +70,7 @@ const footerComponent = {
         if (vm.time < vm.tracks[vm.playlistIndex].data.data[vm.currentTrack].duration/1000 ) {
             console.log(vm.time)
             vm.stopped = false;
+            $timeout.cancel(vm.mytimeout);
             vm.mytimeout = $timeout(vm.startTimer, 1000);
         } else {
             vm.currentTrack++;
@@ -74,9 +80,9 @@ const footerComponent = {
     }
 
     vm.pauseTimer = function () {
-      console.log("paused timers")
+      console.log("hey it works :)")
         $timeout.cancel(vm.mytimeout);
-        vm.stopped = true;
+        vm.play= false;
     }
 
     vm.nextTimer = function () {

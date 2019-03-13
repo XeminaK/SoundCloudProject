@@ -34,6 +34,8 @@ function PlayerService($timeout) {
     }
 
     self.startRadio = function (playlistIndex) {
+        self.clearInterval()
+        console.log("cleared interval in start radio")
         self.playlistIndex = playlistIndex;
         self.currentTrack = 0;
         SC.stream(`/tracks/${self.tracks[self.playlistIndex].data.data[self.currentTrack].id}`).then(function (player) {
@@ -78,7 +80,8 @@ function PlayerService($timeout) {
     }
 
     self.startTimer = function () {
-        console.log("service started")
+        console.log("service")
+
         self.time++;
         //logic
         if (self.time < self.tracks[self.playlistIndex].data.data[self.currentTrack].duration/1000 ) {
