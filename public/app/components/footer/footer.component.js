@@ -14,9 +14,8 @@ const footerComponent = {
       vm.currentTrack = PlayerService.currentTrack;
       vm.play = PlayerService.getPlayStatus();
       vm.time = PlayerService.getTime();
-      console.log(PlayerService.checkTimer())
+      vm.playlistIndex = PlayerService.playlistIndex;
       if (PlayerService.checkTimer()) {
-        console.log("test")
         vm.startTimer()
       } else if (PlayerService.checkTimer() === false) {
         vm.stopped = true
@@ -47,10 +46,10 @@ const footerComponent = {
 
     $rootScope.$on("play", function(event, data) {
       vm.play = true;
-      console.log("test");
       PlayerService.setDefaultImage();
       vm.tracks = PlayerService.tracks;
       vm.currentTrack = 0;
+      vm.playlistIndex = PlayerService.playlistIndex
       vm.startTimer();
       PlayerService.startTimer()
     })
@@ -58,7 +57,7 @@ const footerComponent = {
     vm.startTimer = function () {
         vm.time = PlayerService.getTime();
         //logic
-        if (vm.time < vm.tracks[vm.currentTrack].duration/1000 ) {
+        if (vm.time < vm.tracks[vm.playlistIndex].data.data[vm.currentTrack].duration/1000 ) {
             console.log(vm.time)
             vm.stopped = false;
             vm.mytimeout = $timeout(vm.startTimer, 1000);

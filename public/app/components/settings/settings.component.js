@@ -18,9 +18,8 @@ const settings = {
         
         vm.convertTags = function(playlist) {
             for (let i = 0; i < playlist.tags.length; i++) {
-                vm.tagsArray.push(playlist.tags[i].text)
+                vm.tagsArray.push(playlist.tags[i].text);
             }
-
         }
     }]
 

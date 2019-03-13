@@ -1,12 +1,12 @@
 <footer>
   <div class="album_art_container">
-    <img class="album_art" src="{{$ctrl.tracks[$ctrl.currentTrack].artwork_url}}" alt="album art">
+    <img class="album_art" src="{{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].artwork_url}}" alt="album art">
   </div>
   <div class="artist_info_container">
     <div class="wrapper">
-      <p class="artist_info">{{$ctrl.tracks[$ctrl.currentTrack].title}} </p>
+      <p class="artist_info">{{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].title}} </p>
     </div>
-    <p class="artist_info">{{$ctrl.tracks[$ctrl.currentTrack].user.username}}</p>
+    <p class="artist_info">{{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].user.username}}</p>
   </div>
 
   <div class="controls" ng-show="!$ctrl.play">

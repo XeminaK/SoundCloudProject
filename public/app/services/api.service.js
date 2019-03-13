@@ -4,6 +4,15 @@ function ApiService($http) {
     self.tracks = [];
     self.count = 0;
 
+    self.getPlaylists = function() {
+        return $http({
+            method: "GET",
+            url: "/playlists"
+        })
+    }
+
+    // Posting a playlist
+
     self.setPlaylist = function(playlist) {
         self.playlist = {
             name: playlist.name,
@@ -13,26 +22,12 @@ function ApiService($http) {
         self.checkTags(playlist.tags)
     }
 
-    self.getPlaylists = function() {
-        return $http({
-            method: "GET",
-            url: "/playlists"
-        })
-    }
-    self.postPlaylist = function(data) {
-        $http({
-            method: "POST",
-            url: "/playlists",
-            data: data
-        })
-    }
-
     self.checkTags = function (tags) {
         for (let i = 0; i < tags.length; i++) {
             self.setTracks(tags[i])
         }
     }
-
+    
     self.setTracks = function(keyword) {
         SC.get('/tracks', {
             q: `${keyword}`, limit: 5
@@ -47,6 +42,13 @@ function ApiService($http) {
         });
     }
 
+    self.postPlaylist = function(data) {
+        $http({
+            method: "POST",
+            url: "/playlists",
+            data: data
+        })
+    }
 }
 
 angular.module("App").service("ApiService", ApiService);

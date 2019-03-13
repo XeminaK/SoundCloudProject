@@ -7,20 +7,20 @@ function PlayerService($timeout) {
     self.keyword = 'techno'
     self.startedMusic = false;
     self.newKeywords = ['taylor swift']
-    // self.databaseKeywords = ['techno', 'dogblood', 'edm']
     self.tracks = []
+    self.playlistIndex = 0;
     self.time = 0; // time elapsed
     self.mytimeout = null; // timer itself
     self.stopped = null; // boolean
-    self.activeTimer = false; // checks if there is an active timer in service.  
+    self.activeTimer = false; // checks if there is an active timer in service.
+
     self.setData = function (data) {
-        self.data = data;
-        console.log(self.data);
+        self.tracks = data;
     }
     
     self.nextTrack = function () {
         self.currentTrack++;
-        SC.stream(`/tracks/${self.tracks[self.currentTrack].id}`).then(function (player) {
+        SC.stream(`/tracks/${self.tracks[self.playlistIndex].data.data[self.currentTrack].id}`).then(function (player) {
             self.player = player;
             player.play();
             self.play = true;
@@ -31,12 +31,12 @@ function PlayerService($timeout) {
         });
     }
 
-    self.startRadio = function () {
-        SC.stream(`/tracks/${self.tracks[0].id}`).then(function (player) {
+    self.startRadio = function (playlistIndex) {
+        self.playlistIndex = playlistIndex
+        SC.stream(`/tracks/${self.tracks[self.playlistIndex].data.data[self.currentTrack].id}`).then(function (player) {
             self.player = player;
             player.play();
             self.startedMusic = true;
-            console.log(self.tracks)
             // self.player.on('finish', function () {
             //     self.nextTrack()
             // })
@@ -63,9 +63,9 @@ function PlayerService($timeout) {
     }
 
     self.setDefaultImage = function () {
-        for (let i = 0; i < self.tracks.length; i++) {
-            if (self.tracks[i].artwork_url === null) {
-                self.tracks[i].artwork_url = "app/images/cloudie_face.png"
+        for (let i = 0; i < self.tracks[self.playlistIndex].data.data.length; i++) {
+            if (self.tracks[self.playlistIndex].data.data[i].artwork_url === null) {
+                self.tracks[self.playlistIndex].data.data[i].artwork_url = "app/images/cloudie_face.png"
             }
         }
     }
@@ -78,7 +78,7 @@ function PlayerService($timeout) {
         console.log("service started")
         self.time++;
         //logic
-        if (self.time < self.tracks[self.currentTrack].duration/1000 ) {
+        if (self.time < self.tracks[self.playlistIndex].data.data[self.currentTrack].duration/1000 ) {
             console.log(self.time)
             self.stopped = false;
             self.activeTimer = true;
