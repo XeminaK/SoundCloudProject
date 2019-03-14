@@ -3,9 +3,9 @@ body, html {
   overflow: scroll;
 }
 
-header {
+/* header {
   margin-bottom: 50px;
-}
+} */
 
 nav {
   display: flex;
@@ -14,6 +14,7 @@ nav {
   width: 100vw;
   top: 0;
   background-color: #212121;
+  height: 10vh;
 }
 
 .logo {
@@ -61,6 +62,7 @@ footer {
   color: #E65100; 
   padding: 0 10px;
   cursor: pointer;
+  font-size: 48px;
 }
 
 .wrapper {
@@ -92,4 +94,65 @@ footer {
   50% { transform: translateX(-40%); }
   80% { transform: translateX(0%); }
   100% { transform: translateX(0%); }
+}
+
+/* CSS Styling for player page */
+.player_container {
+  border: 1px solid black;
+  height: 90vh;
+  width: 100vw;
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button_container {
+height: 10%;
+border: solid 1px red;
+width: 80vw;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.fa-angle-down, .fa-cog {
+  font-size: 24px; 
+}
+
+.album_container {
+height: 55%;
+border: solid 1px green;
+width: 65vw;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.album_container img {
+  height: 80%;
+}
+.title_and_artist {
+height: 15%;
+border: solid 1px blue;
+width: 80vw;
+text-align: center;
+}
+
+.control_container {
+height: 10%;
+border: solid 1px purple;
+width: 80vw;
+display: flex;
+justify-content: space-around;
+align-items: center;
+}
+
+.fa-heart {
+  font-size: 48px;
+  color: #E65100; 
+}
+
+.footer_control {
+  font-size: 24px;
 }

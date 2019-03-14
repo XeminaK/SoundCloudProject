@@ -1,15 +1,27 @@
 <header></header>
-<p>PLAYER PAGE</p>
-<button ng-click="$ctrl.goBack()">Go Back to Home</button>
-<button ng-click="$ctrl.settings()">Settings</button>
-<img src="{{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].artwork_url}}" alt="album art">
-<p> {{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].title}} </p>
-<p> {{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].user.username}}</p>
-<div class="controls" ng-show="!$ctrl.play">
-    <i class="fas fa-play" ng-click="$ctrl.togglePlay()"></i>
+<!-- <p>PLAYER PAGE</p> -->
+<div class="player_container">
+
+  <div class="button_container">
+    <i class="fas fa-angle-down" ng-click="$ctrl.goBack()"></i>
+    <i class="fas fa-cog" ng-click="$ctrl.settings()"></i>
+  </div>
+
+  <div class="album_container">
+    <img src="{{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].artwork_url}}" alt="album art">
+  </div>
+
+  <div class="title_and_artist">
+    <p> {{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].title}} </p>
+    <p> {{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].user.username}} </p>
+  </div>
+
+  <div class="control_container">
+    <!-- fas is filled in, far is not filled in -->
+    <i class="far fa-heart"></i>
+    <i ng-show="!$ctrl.play" class="fas fa-play" ng-click="$ctrl.togglePlay()"></i>
+    <i ng-show="$ctrl.play" class="fas fa-pause" ng-click="$ctrl.togglePlay()"></i>
     <i class="fas fa-forward" ng-click="$ctrl.nextTrack()"></i>
   </div>
-  <div class="controls" ng-show="$ctrl.play">
-    <i class="fas fa-pause" ng-click="$ctrl.togglePlay()"></i>
-    <i class="fas fa-forward" ng-click="$ctrl.nextTrack()"></i>
-  </div>
+
+</div>
