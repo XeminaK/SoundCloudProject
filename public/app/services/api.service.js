@@ -75,6 +75,7 @@ function ApiService($http) {
             data: data
         })
     }
+    
 }
 
 angular.module("App").service("ApiService", ApiService);

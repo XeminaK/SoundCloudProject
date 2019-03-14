@@ -26,9 +26,11 @@ playlists.delete("/playlists/:id", function(req, res) {
 })
 
 playlists.put("/playlists/:id", function(req, res) {
-  pool.query("update playlists set name=$1::text, category=$2::text, tags=$3::text[], data=$4::jsonb where id=$5::int", [req.body.name, req.body.category, req.body.tags, req.body.data, req.params.id]).then(function() {
-    pool.query("select * from playlists").then(function(result) {
-      res.send(result.rows);
+  pool.query("update playlists set tags=$1::text[], data=$2::jsonb where id=$3::int", [[], {}, req.params.id]).then(function() {
+    pool.query("update playlists set name=$1::text, category=$2::text, tags=$3::text[], data=$4::jsonb where id=$5::int", [req.body.name, req.body.category, req.body.tags, req.body.data, req.params.id]).then(function() {
+      pool.query("select * from playlists").then(function(result) {
+        res.send(result.rows);
+      })
     })
   })
 })
