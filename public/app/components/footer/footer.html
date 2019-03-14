@@ -1,4 +1,5 @@
 <footer>
+  <p ng-model="$ctrl.event"></p>
   <div class="album_art_container">
     <img class="album_art" ng-click="$ctrl.goToPlayer()" src="{{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].artwork_url}}" alt="album art">
   </div>
@@ -15,7 +16,7 @@
     <i class="fas fa-forward footer_control" ng-click="$ctrl.nextTrack()"></i>
   </div>
   <div class="controls" ng-show="$ctrl.play">
-    <i class="fas fa-pause footer_control" ng-click="$ctrl.togglePlay()"></i>
+    <i class="fas fa-pause footer_control" ng-click="$ctrl.togglePlay()" ></i>
     <i class="fas fa-forward footer_control" ng-click="$ctrl.nextTrack()"></i>
   </div>
 </footer>
