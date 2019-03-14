@@ -5,7 +5,7 @@ function ApiService($http) {
     self.count = 0;
     self.createMode = null;
 
-    self.getPlaylists = function() {
+    self.getPlaylists = function () {
         return $http({
             method: "GET",
             url: "/playlists"
@@ -13,7 +13,7 @@ function ApiService($http) {
     }
 
     // Posting a playlist
-    self.editPlaylist = function(playlist) {
+    self.editPlaylist = function (playlist) {
         console.log(playlist);
         self.createMode = false;
         self.playlist = {
@@ -24,7 +24,7 @@ function ApiService($http) {
         }
         self.checkTags(playlist.tags)
     }
-    self.setPlaylist = function(playlist) {
+    self.setPlaylist = function (playlist) {
         self.createMode = true;
         self.playlist = {
             id: playlist.id,
@@ -40,14 +40,16 @@ function ApiService($http) {
             self.setTracks(tags[i])
         }
     }
-    
-    self.setTracks = function(keyword) {
+
+    self.setTracks = function (keyword) {
         SC.get('/tracks', {
-            q: `${keyword}`, limit: 5
+            q: `${keyword}`, limit: 10
         }).then(function (tracks) {
             self.tracks = self.tracks.concat(tracks)
+            console.log(self.tracks);
             self.count++
             if (self.count === self.playlist.tags.length) {
+                self.tracks = self.convertToHighRes(self.tracks);
                 self.playlist.data = { data: self.tracks }
                 console.log(self.playlist)
                 if (self.createMode) {
@@ -61,21 +63,35 @@ function ApiService($http) {
         });
     }
 
-    self.postPlaylist = function(data) {
+    self.convertToHighRes = function (tracks) {
+        let img = null;
+        console.log("test");
+        for (let i = 0; i < tracks.length; i++) {
+            img = tracks[i].artwork_url.split("");
+            console.log(img.length);
+            img = img.slice(0, img.length - 9).join("");
+            console.log(img);
+            img = img + "t500x500.jpg";
+            tracks[i].artwork_url = img;
+        }
+        return tracks;
+    }
+
+    self.postPlaylist = function (data) {
         $http({
             method: "POST",
             url: "/playlists",
             data: data
         })
     }
-    self.putPlaylist = function(data) {
+    self.putPlaylist = function (data) {
         $http({
             method: "PUT",
             url: `/playlists/${data.id}`,
             data: data
         })
     }
-    
+
 }
 
 angular.module("App").service("ApiService", ApiService);
