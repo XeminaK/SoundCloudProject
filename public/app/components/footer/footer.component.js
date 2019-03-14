@@ -75,7 +75,7 @@ const footerComponent = {
       let timersDuration = vm.tracks[vm.playlistIndex].data.data[vm.currentTrack].duration/1000;
       let serviceDuration = PlayerService.tracks[PlayerService.playlistIndex].data.data[PlayerService.currentTrack].duration/1000;
       // if a song is playing and the
-      if(vm.play && timersDuration === serviceDuration){
+      if(vm.play && timersDuration === serviceDuration){ 
         vm.time = PlayerService.getTime();
         //logic
         if (vm.time < vm.tracks[vm.playlistIndex].data.data[vm.currentTrack].duration/1000 ) {

@@ -52,6 +52,7 @@ footer {
 
 .album_art_container {
   height: 100px;
+  cursor: pointer;
 }
 
 .album_art {
@@ -75,6 +76,7 @@ footer {
 .artist_info_container {
   flex: 1;
   margin-left: 10px;
+  cursor: pointer;
 }
 
 .artist_info {

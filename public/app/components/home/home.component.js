@@ -5,12 +5,17 @@ const home = {
   controller: ["NavigateService", "PlayerService", "$rootScope", "ApiService", function (NavigateService, PlayerService, $rootScope, ApiService) {
     const vm = this;
     vm.startedMusic = false;
+    vm.playlists = [];
 
     vm.$onInit = function () {
       vm.startedMusic = PlayerService.checkMusic();
       ApiService.getPlaylists().then(function (result) {
+        for( let i = 0; i < result.data.length; i++){
+          result.data[i].data.data = ApiService.shuffle(result.data[i].data.data)
+          vm.playlists = result.data
+          console.log("shuffled")
+        }
         PlayerService.setData(result.data);
-        vm.playlists = result.data;
         console.log(vm.playlists);
       });
     };

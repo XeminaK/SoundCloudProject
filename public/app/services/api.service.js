@@ -24,6 +24,7 @@ function ApiService($http) {
         }
         self.checkTags(playlist.tags)
     }
+
     self.setPlaylist = function (playlist) {
         self.createMode = true;
         self.playlist = {
@@ -67,12 +68,14 @@ function ApiService($http) {
         let img = null;
         console.log("test");
         for (let i = 0; i < tracks.length; i++) {
-            img = tracks[i].artwork_url.split("");
-            console.log(img.length);
-            img = img.slice(0, img.length - 9).join("");
-            console.log(img);
-            img = img + "t500x500.jpg";
-            tracks[i].artwork_url = img;
+            if (tracks[i].artwork_url !== null) {
+                img = tracks[i].artwork_url.split("");
+                console.log(img.length);
+                img = img.slice(0, img.length - 9).join("");
+                console.log(img);
+                img = img + "t500x500.jpg";
+                tracks[i].artwork_url = img;
+            }
         }
         return tracks;
     }
@@ -90,6 +93,25 @@ function ApiService($http) {
             url: `/playlists/${data.id}`,
             data: data
         })
+    }
+
+    self.shuffle = function(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+      
+          // Pick a remaining element...
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+      
+          // And swap it with the current element.
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+        console.log(array)
+        return array;
     }
 
 }
