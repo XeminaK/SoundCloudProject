@@ -3,7 +3,7 @@
 const pg = require("pg");
 const credentials =  new pg.Pool({
    user: "postgres",
-   password: "PASSWORD",
+   password: "password",
    host: "localhost",
    port: 5432,
    database: "cloudieDB",

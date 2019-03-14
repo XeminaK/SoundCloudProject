@@ -23,6 +23,7 @@ function PlayerService($timeout) {
         self.clearInterval()
         console.log("stopped timer in player")
         self.currentTrack++;
+        console.log(self.currentTrack)
         SC.stream(`/tracks/${self.tracks[self.playlistIndex].data.data[self.currentTrack].id}`).then(function (player) {
             self.player = player;
             player.play();

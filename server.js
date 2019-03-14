@@ -12,6 +12,6 @@ app.use(express.json());
 app.use("/", categories);
 app.use("/", playlists);
 
-app.listen(8888, function() {
+app.listen(8080, function() {
   console.log("Server is running");
 })
