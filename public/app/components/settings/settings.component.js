@@ -16,6 +16,8 @@ const settings = {
         vm.playlist.name = vm.tracks[vm.playlistIndex].name;
         vm.playlist.category = vm.tracks[vm.playlistIndex].category;
         vm.playlist.tags = vm.convertTagsToObject(vm.tracks[vm.playlistIndex].tags);
+        vm.playlist.id = vm.tracks[vm.playlistIndex].id;
+        console.log(vm.playlist.id);
       }
     }
 
@@ -25,10 +27,19 @@ const settings = {
     }
 
     vm.submit = function (playlist) {
-      vm.convertTagsToText(playlist);
-      playlist.tags = vm.tagsArray;
-      ApiService.setPlaylist(playlist);
+      if (PlayerService.createMode) {
+        vm.tagsArray = [];
+        vm.convertTagsToText(playlist);
+        playlist.tags = vm.tagsArray;
+        ApiService.setPlaylist(playlist);
+      } else {
+        vm.tagsArray = [];
+        vm.convertTagsToText(playlist);
+        playlist.tags = vm.tagsArray;
+        ApiService.editPlaylist(playlist);
+      }
     }
+
 
     vm.convertTagsToText = function (playlist) {
       for (let i = 0; i < playlist.tags.length; i++) {

@@ -3,6 +3,7 @@ function ApiService($http) {
     const self = this;
     self.tracks = [];
     self.count = 0;
+    self.createMode = null;
 
     self.getPlaylists = function() {
         return $http({
@@ -12,9 +13,21 @@ function ApiService($http) {
     }
 
     // Posting a playlist
-
-    self.setPlaylist = function(playlist) {
+    self.editPlaylist = function(playlist) {
+        console.log(playlist);
+        self.createMode = false;
         self.playlist = {
+            id: playlist.id,
+            name: playlist.name,
+            category: playlist.category,
+            tags: playlist.tags
+        }
+        self.checkTags(playlist.tags)
+    }
+    self.setPlaylist = function(playlist) {
+        self.createMode = true;
+        self.playlist = {
+            id: playlist.id,
             name: playlist.name,
             category: playlist.category,
             tags: playlist.tags
@@ -37,7 +50,13 @@ function ApiService($http) {
             if (self.count === self.playlist.tags.length) {
                 self.playlist.data = { data: self.tracks }
                 console.log(self.playlist)
-                self.postPlaylist(self.playlist)
+                if (self.createMode) {
+                    self.postPlaylist(self.playlist);
+                }
+                else {
+                    console.log("hi");
+                    self.putPlaylist(self.playlist);
+                }
             }
         });
     }
@@ -46,6 +65,13 @@ function ApiService($http) {
         $http({
             method: "POST",
             url: "/playlists",
+            data: data
+        })
+    }
+    self.putPlaylist = function(data) {
+        $http({
+            method: "PUT",
+            url: `/playlists/${data.id}`,
             data: data
         })
     }
