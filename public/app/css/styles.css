@@ -98,7 +98,7 @@ footer {
 
 /* CSS Styling for player page */
 .player_container {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   height: 90vh;
   width: 100vw;
   margin-top: 10vh;
@@ -109,7 +109,7 @@ footer {
 
 .button_container {
 height: 10%;
-border: solid 1px red;
+/* border: solid 1px red; */
 width: 80vw;
 display: flex;
 justify-content: space-between;
@@ -122,7 +122,7 @@ align-items: center;
 
 .album_container {
 height: 55%;
-border: solid 1px green;
+/* border: solid 1px green; */
 width: 65vw;
 display: flex;
 justify-content: center;
@@ -134,14 +134,14 @@ align-items: center;
 }
 .title_and_artist {
 height: 15%;
-border: solid 1px blue;
+/* border: solid 1px blue; */
 width: 80vw;
 text-align: center;
 }
 
 .control_container {
 height: 10%;
-border: solid 1px purple;
+/* border: solid 1px purple; */
 width: 80vw;
 display: flex;
 justify-content: space-around;
@@ -155,4 +155,11 @@ align-items: center;
 
 .footer_control {
   font-size: 24px;
+}
+
+/* Styling for home page */
+.home_container {
+  /* border: solid 1px black; */
+  height: 90vh;
+  margin-top: 12vh;
 }
