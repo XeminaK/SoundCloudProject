@@ -70,6 +70,7 @@ function PlayerService($timeout) {
     }
 
     self.setDefaultImage = function () {
+        console.log("function ran")
         for (let j = 0; j < self.tracks.length; j++) {
             for (let i = 0; i < self.tracks[j].data.data.length; i++) {
                 if (self.tracks[j].data.data[i].artwork_url === null) {

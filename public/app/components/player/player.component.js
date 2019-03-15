@@ -32,6 +32,7 @@ const player = {
       } else if (PlayerService.checkTimer() === false) {
         vm.stopped = true
       }
+      PlayerService.setDefaultImage();
     }
     vm.togglePlay = function() {
       vm.play = PlayerService.togglePlay();

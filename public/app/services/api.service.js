@@ -60,7 +60,6 @@ function ApiService($http, $location) {
                     console.log("hi");
                     self.putPlaylist(self.playlist);
                 }
-                $location.path("/home");
             }
         });
     }
@@ -86,6 +85,8 @@ function ApiService($http, $location) {
             method: "POST",
             url: "/playlists",
             data: data
+        }).then(function() {
+            $location.path("/home");
         })
     }
     self.putPlaylist = function (data) {
@@ -93,6 +94,8 @@ function ApiService($http, $location) {
             method: "PUT",
             url: `/playlists/${data.id}`,
             data: data
+        }).then(function() {
+            $location.path("/home");
         })
     }
 
