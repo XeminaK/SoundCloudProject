@@ -2,7 +2,7 @@
 
 const footerComponent = {
   templateUrl: "app/components/footer/footer.html",
-  controller: ["PlayerService", "$rootScope", "$timeout", "ApiService", "NavigateService", function(PlayerService, $rootScope, $timeout, ApiService, NavigateService) {
+  controller: ["PlayerService", "$rootScope", "$timeout", "ApiService", "NavigateService", function (PlayerService, $rootScope, $timeout, ApiService, NavigateService) {
     const vm = this;
     vm.playlistIndex = 0;
     vm.currentTrack = 0;
@@ -10,8 +10,8 @@ const footerComponent = {
     vm.mytimeout = null; // timer itPlayerService
     vm.stopped = null; // boolean that turns timer on/off
 
-    vm.$onInit = function() {
-      vm.tracks = PlayerService.tracks; 
+    vm.$onInit = function () {
+      vm.tracks = PlayerService.tracks;
       vm.currentTrack = PlayerService.currentTrack;
       vm.play = PlayerService.getPlayStatus();
       console.log("Timeout canceled on init")
@@ -31,7 +31,7 @@ const footerComponent = {
     //   console.log(e)
     // }
 
-    vm.$onDestroy = function() {
+    vm.$onDestroy = function () {
       console.log("footer destroyed")
       $timeout.cancel(vm.mytimeout);
     }
@@ -43,12 +43,13 @@ const footerComponent = {
       console.log(vm.currentTrack)
       vm.nextTimer();
     }
-    
-    vm.togglePlay = function() {
+
+    vm.togglePlay = function () {
       // if you skip forward really fast and press pause it wont update the artwork
+      console.log("toggle play works yoooo")
       vm.play = PlayerService.togglePlay();
       vm.currentTrack = PlayerService.currentTrack;
-      if(vm.play) {
+      if (vm.play) {
         console.log("play");
         $timeout.cancel(vm.mytimeout)
         vm.startTimer();
@@ -58,9 +59,9 @@ const footerComponent = {
       }
     }
 
-    $rootScope.$on("play", function(event, data) {
+    $rootScope.$on("play", function (event, data) {
+      console.log("yo this shit works");
       vm.play = true;
-      PlayerService.setDefaultImage();
       vm.tracks = PlayerService.tracks;
       console.log(vm.tracks)
       vm.currentTrack = 0;
@@ -72,18 +73,22 @@ const footerComponent = {
       PlayerService.startTimer()
     })
 
+    $rootScope.$on("togglePlay", function (event, data) {
+      console.log("togglePlay works!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    });
+
     vm.startTimer = function () {
       // checks play status from player service
       vm.play = PlayerService.getPlayStatus();
       // if its true (something is playing) then continue the loop
       // i noticed that timers were playing from different durations so
-      let timersDuration = vm.tracks[vm.playlistIndex].data.data[vm.currentTrack].duration/1000;
-      let serviceDuration = PlayerService.tracks[PlayerService.playlistIndex].data.data[PlayerService.currentTrack].duration/1000;
+      let timersDuration = vm.tracks[vm.playlistIndex].data.data[vm.currentTrack].duration / 1000;
+      let serviceDuration = PlayerService.tracks[PlayerService.playlistIndex].data.data[PlayerService.currentTrack].duration / 1000;
       // if a song is playing and the
-      if(vm.play && timersDuration === serviceDuration){ 
+      if (vm.play && timersDuration === serviceDuration) {
         vm.time = PlayerService.getTime();
         //logic
-        if (vm.time < vm.tracks[vm.playlistIndex].data.data[vm.currentTrack].duration/1000 ) {
+        if (vm.time < vm.tracks[vm.playlistIndex].data.data[vm.currentTrack].duration / 1000) {
           console.log(vm.play)
           console.log(vm.tracks[vm.playlistIndex].data.data[vm.currentTrack].duration)
           console.log(vm.time)
@@ -95,7 +100,7 @@ const footerComponent = {
           $timeout.cancel(vm.mytimeout);
           vm.mytimeout = $timeout(vm.startTimer, 1000);
         }
-      // other wise cancel the timeout
+        // other wise cancel the timeout
       } else {
         $timeout.cancel(vm.mytimeout);
       }
@@ -104,16 +109,16 @@ const footerComponent = {
     vm.pauseTimer = function () {
       console.log("hey it works :)")
       $timeout.cancel(vm.mytimeout);
-      vm.play= false;
+      vm.play = false;
     }
 
     vm.nextTimer = function () {
-        console.log("stopped timer in footer")
-        vm.time = 0;
-        $timeout.cancel(vm.mytimeout);
-        vm.mytimeout = $timeout(vm.startTimer, 1000);
+      console.log("stopped timer in footer")
+      vm.time = 0;
+      $timeout.cancel(vm.mytimeout);
+      vm.mytimeout = $timeout(vm.startTimer, 1000);
     }
-    vm.goToPlayer = function() {
+    vm.goToPlayer = function () {
       console.log("timer footer canceled")
       $timeout.cancel(vm.mytimeout);
       NavigateService.toPlayer();

@@ -70,9 +70,12 @@ function PlayerService($timeout) {
     }
 
     self.setDefaultImage = function () {
-        for (let i = 0; i < self.tracks[self.playlistIndex].data.data.length; i++) {
-            if (self.tracks[self.playlistIndex].data.data[i].artwork_url === null) {
-                self.tracks[self.playlistIndex].data.data[i].artwork_url = "app/images/cloudie_face.png"
+        for (let j = 0; j < self.tracks.length; j++) {
+            for (let i = 0; i < self.tracks[j].data.data.length; i++) {
+                if (self.tracks[j].data.data[i].artwork_url === null) {
+                    console.log("found null")
+                    self.tracks[j].data.data[i].artwork_url = "app/images/cloudie_face.png"
+                }
             }
         }
     }

@@ -21,9 +21,8 @@ const settings = {
       }
     }
 
-
     vm.goBack = function () {
-      NavigateService.toPlayer();
+      NavigateService.toHome();
     }
 
     vm.submit = function (playlist) {

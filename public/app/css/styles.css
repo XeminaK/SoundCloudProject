@@ -1,11 +1,8 @@
 body, html {
   margin: 0 auto;
   overflow: scroll;
+  background-color: #DFE6E9;
 }
-
-/* header {
-  margin-bottom: 50px;
-} */
 
 nav {
   display: flex;
@@ -164,6 +161,31 @@ align-items: center;
   /* border: solid 1px black; */
   height: 90vh;
   margin-top: 12vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.home_album_cont {
+  margin: 0 20px;
+}
+
+.home_album_art {
+  width: 175px;
+  height: 175px;
+  object-fit: cover;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  transition: all .2s ease-in-out;
+}
+
+.home_album_art:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  cursor: pointer;
+  transition: 0.5s all;
+  transform: scale(1.025);
+}
+
+.home_playlist_name {
+  text-align: center;
 }
 
 /* Styling for Settings Page */
@@ -174,7 +196,7 @@ align-items: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ebebe0;
+  background-color: #DFE6E9;
   height: 90vh;
 }
 
@@ -196,17 +218,50 @@ align-items: center;
   background-color: #E65100;
   border: none;
   outline: none;
-  border-radius: 3px;
   cursor: pointer;
   width: 100%;
+  color: white;
+  font-size: 24px;
+  border-radius: 10px;
 }
 
-.categories_input {
-  padding: 15px 20px;
-  background-color: #ebebe0;
+.categories_input, .name_input {
+  font-size: 32px;
+  background-color: #DFE6E9;
+  border: none;
+  outline: none;
+  margin: 8px 0;
+  padding-bottom: 4px;
+}
+
+.categories_input:focus, .name_input:focus { 
+  border-bottom: 2px solid #212121;
 }
 
 .name_input {
-  padding: 10px 15px;
-  background-color: #ebebe0;
+  font-size: 24px;
+}
+
+tags-input .tags .tag-item {
+  padding: 4px !important;
+  background: #212121 !important;
+  color:#DFE6E9;
+}
+
+tags-input .tags .tag-item .remove-button {
+  color: #DFE6E9 !important;
+}
+
+tags-input * {
+  border: none !important;
+  outline: none !important;
+  font: auto !important;
+  font-size: 16px !important;
+  height: auto !important;
+  border-radius: 10px;
+}
+
+tags-input .tags {
+  padding: 16px 8px !important;
+  margin-bottom: 16px;
 }

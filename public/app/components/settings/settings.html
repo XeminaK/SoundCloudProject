@@ -1,12 +1,10 @@
 <header></header>
 <div class="settings_container">
-    <button ng-click="$ctrl.goBack()">Go Back</button>
-    
     <div class="form_container">
         <form ng-submit="$ctrl.submit($ctrl.playlist)">
             <div class="input_containers">
-                <input class="categories_input" type="text" placeholder="Categories" ng-model="$ctrl.playlist.category">
-                <input class="name_input" type="text" placeholder="Name" ng-model="$ctrl.playlist.name">
+                <input class="categories_input" type="text" placeholder="Category" ng-model="$ctrl.playlist.category">
+                <input class="name_input" type="text" placeholder="Playlist name" ng-model="$ctrl.playlist.name">
             </div>
             <tags-input ng-model="$ctrl.playlist.tags"></tags-input>
             <!-- <p>Model: {{$ctrl.playlist.tags}}</p> -->

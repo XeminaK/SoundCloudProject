@@ -14,6 +14,8 @@ const home = {
           result.data[i].data.data = ApiService.shuffle(result.data[i].data.data)
           vm.playlists = result.data
           console.log("shuffled")
+          PlayerService.tracks = vm.playlists;
+          PlayerService.setDefaultImage();
         }
         PlayerService.setData(result.data);
         console.log(vm.playlists);

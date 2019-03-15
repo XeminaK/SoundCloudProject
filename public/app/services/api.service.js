@@ -1,5 +1,5 @@
 "use strict";
-function ApiService($http) {
+function ApiService($http, $location) {
     const self = this;
     self.tracks = [];
     self.count = 0;
@@ -60,6 +60,7 @@ function ApiService($http) {
                     console.log("hi");
                     self.putPlaylist(self.playlist);
                 }
+                $location.path("/home");
             }
         });
     }
