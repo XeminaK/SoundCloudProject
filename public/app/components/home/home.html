@@ -1,8 +1,9 @@
 <header></header>
 <div class="home_container">
     <div class="home_album_cont" ng-click="$ctrl.startRadio($index)" ng-repeat="playlist in $ctrl.playlists track by $index">
-        <img class="home_album_art" src="{{playlist.data.data[0].artwork_url}}" alt="" >
         <p class="home_playlist_name">{{playlist.name}}</p>
+        <div class="album_gradient"></div>
+        <img class="home_album_art" src="{{playlist.data.data[0].artwork_url}}" alt="">
     </div>
 </div>
 <footer-component ng-show="$ctrl.startedMusic"></footer-component>
