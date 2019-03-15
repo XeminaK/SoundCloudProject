@@ -113,6 +113,15 @@ function ApiService($http, $location) {
         })
     }
 
+    self.deletePlaylist = function(playlist) {
+        $http({
+            method: "DELETE",
+            url: `/playlists/${playlist.id}`
+        }).then(function() {
+            $location.path("/home");
+        })
+    }
+
     self.shuffle = function(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;
 

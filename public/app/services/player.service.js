@@ -52,6 +52,11 @@ function PlayerService($timeout) {
         self.play = true;
     }
 
+    self.pausePlayer = function() {
+        console.log("attempt to pause player")
+        self.player.pause();
+    }
+
     self.togglePlay = function () {
         if (self.play) {
             self.player.pause();

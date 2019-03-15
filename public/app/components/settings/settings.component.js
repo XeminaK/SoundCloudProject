@@ -39,6 +39,13 @@ const settings = {
       }
     }
 
+    vm.deletePlaylist = function(playlist) {
+      PlayerService.play = false;
+      PlayerService.startedMusic = false;
+      PlayerService.pausePlayer();
+      ApiService.deletePlaylist(playlist);
+      console.log("does this work?");
+    }
 
     vm.convertTagsToText = function (playlist) {
       for (let i = 0; i < playlist.tags.length; i++) {
