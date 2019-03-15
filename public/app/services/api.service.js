@@ -37,6 +37,8 @@ function ApiService($http, $location) {
     }
 
     self.checkTags = function (tags) {
+        self.tracks = [];
+        self.count = 0;
         for (let i = 0; i < tags.length; i++) {
             self.setTracks(tags[i])
         }
@@ -67,20 +69,25 @@ function ApiService($http, $location) {
     self.convertToHighRes = function (tracks) {
         let img = null;
         let orig = null;
+        let imgEnd = null;
         console.log("test");
         for (let i = 0; i < tracks.length; i++) {
             if (tracks[i].artwork_url !== null) {
-                orig = tracks[i].artwork_url.split("");
+                orig = tracks[i].artwork_url;
                 img = tracks[i].artwork_url.split("");
 
-                let imgEnd = img.slice(img.length - 12, img.length); // g
+                imgEnd = img.slice(img.length - 13, img.length - 1).join(""); // check for t500
 
                 if (imgEnd !== "t500x500.jpg"){
                     console.log(img.length);
-                    img = img.slice(0, img.length - 9).join("");
+                    img = img.slice(0, img.length - 10).join("");
+                    img = img + "-t500x500.jpg";
                     console.log(img);
-                    img = img + "t500x500.jpg";
                     tracks[i].artwork_url = img;
+                } else {
+                    tracks[i].artwork_url = orig;
+                    console.log(orig)
+                    tracks[i].artwork_url
                 }
             }
         }
