@@ -66,15 +66,22 @@ function ApiService($http, $location) {
 
     self.convertToHighRes = function (tracks) {
         let img = null;
+        let orig = null;
         console.log("test");
         for (let i = 0; i < tracks.length; i++) {
             if (tracks[i].artwork_url !== null) {
+                orig = tracks[i].artwork_url.split("");
                 img = tracks[i].artwork_url.split("");
-                console.log(img.length);
-                img = img.slice(0, img.length - 9).join("");
-                console.log(img);
-                img = img + "t500x500.jpg";
-                tracks[i].artwork_url = img;
+
+                let imgEnd = img.slice(img.length - 12, img.length); // g
+
+                if (imgEnd !== "t500x500.jpg"){
+                    console.log(img.length);
+                    img = img.slice(0, img.length - 9).join("");
+                    console.log(img);
+                    img = img + "t500x500.jpg";
+                    tracks[i].artwork_url = img;
+                }
             }
         }
         return tracks;
