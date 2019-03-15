@@ -26,6 +26,11 @@ const footerComponent = {
       }
     }
 
+    // vm.keyPress = function(e) {
+    //   console.log("hello");
+    //   console.log(e)
+    // }
+
     vm.$onDestroy = function() {
       console.log("footer destroyed")
       $timeout.cancel(vm.mytimeout);
