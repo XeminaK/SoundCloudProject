@@ -46,7 +46,7 @@ function ApiService($http, $location) {
 
     self.setTracks = function (keyword) {
         SC.get('/tracks', {
-            q: `${keyword}`, limit: 10
+            q: `${keyword}`, limit: 15
         }).then(function (tracks) {
             self.tracks = self.tracks.concat(tracks)
             console.log(self.tracks);

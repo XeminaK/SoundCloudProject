@@ -38,6 +38,7 @@ function PlayerService($timeout) {
     self.startRadio = function (playlistIndex) {
         self.clearInterval()
         console.log("cleared interval in start radio")
+        self.activeTimer = true;
         self.playlistIndex = playlistIndex;
         self.currentTrack = 0;
         SC.stream(`/tracks/${self.tracks[self.playlistIndex].data.data[self.currentTrack].id}`).then(function (player) {
