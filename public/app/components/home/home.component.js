@@ -55,7 +55,9 @@ const home = {
       };
 
       vm.base64 = function(url, callback) {
+        // xml http request
         var xhr = new XMLHttpRequest();
+        // on load calls the filereader api
         xhr.onload = function() {
           var reader = new FileReader();
           reader.onloadend = function() {
@@ -63,7 +65,9 @@ const home = {
           };
           reader.readAsDataURL(xhr.response);
         };
+        // sends get request to the url 
         xhr.open("GET", url);
+        // requests the response as a blob
         xhr.responseType = "blob";
         xhr.send();
       };
@@ -72,11 +76,7 @@ const home = {
         vm.base64("https://i1.sndcdn.com/artworks-000036981681-ewqqqv-t500x500.jpg", function(response) {
             var img = document.getElementById("test");
             img.setAttribute("src", response);
-
-            var c = document.getElementById("myCanvas");
-            var ctx = c.getContext("2d");
             img.onload = function() {
-              ctx.drawImage(img, 0, 0);
               var colorThief = new ColorThief();
               console.log("YOOOOO", colorThief.getPalette(img, 8));
             };
