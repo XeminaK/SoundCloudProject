@@ -1,5 +1,7 @@
 <header></header>
 <div class="home_container">
+    <canvas id="myCanvas"></canvas>
+    <img id= "test" alt="">
     <div class="home_album_cont" ng-click="$ctrl.startRadio($index)" ng-repeat="playlist in $ctrl.playlists track by $index">
         <p class="home_playlist_name">{{playlist.name}}</p>
         <div class="album_gradient"></div>

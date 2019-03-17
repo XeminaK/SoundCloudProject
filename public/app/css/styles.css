@@ -304,3 +304,6 @@ tags-input .tags {
   padding: 16px 8px !important;
   margin-bottom: 16px;
 }
+#mycanvas {
+  z-index: 100000;
+}

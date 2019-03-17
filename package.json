@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/XeminaK/SoundCloudProject#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.16.4",
+    "image-to-base64": "^2.0.1",
     "pg": "^7.8.2"
   }
 }
