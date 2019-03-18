@@ -8,8 +8,10 @@ const settings = {
     vm.playlistIndex = null;
     vm.playlist = {};
     vm.tracks = null;
+    vm.categories = [];
 
     vm.$onInit = function () {
+      vm.categories = ApiService.getCategories();
       if (!PlayerService.createMode) {
         vm.tracks = PlayerService.tracks;
         vm.playlistIndex = PlayerService.playlistIndex;
@@ -20,12 +22,26 @@ const settings = {
         console.log(vm.playlist.id);
       }
     }
-
+    vm.checkCategories = function (category) {
+      for (let i = 0; i < vm.categories.length; i++) {
+        console.log(vm.categories[i].name)
+        console.log(category)
+        if (vm.categories[i].name === category) {
+          
+          return true;
+          
+        }
+      }
+      return false;
+    }
     vm.goBack = function () {
       NavigateService.toHome();
     }
 
-    vm.submit = function (playlist) {
+    vm.submit = function (playlist) { 
+      if (!vm.checkCategories(playlist.category)) { 
+        ApiService.postCategory(playlist); 
+      }
       if (PlayerService.createMode) {
         vm.tagsArray = [];
         vm.convertTagsToText(playlist);
@@ -39,7 +55,7 @@ const settings = {
       }
     }
 
-    vm.deletePlaylist = function(playlist) {
+    vm.deletePlaylist = function (playlist) {
       PlayerService.play = false;
       PlayerService.startedMusic = false;
       PlayerService.pausePlayer();

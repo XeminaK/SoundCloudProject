@@ -19,9 +19,13 @@ const home = {
         }
         PlayerService.setData(result.data);
         console.log(vm.playlists);
+        ApiService.getCategories().then(function(result) {
+          vm.categories = result.data;
+        })
       });
+      
     };
-    
+  
 
     // todo: nested ng-repeat 
 

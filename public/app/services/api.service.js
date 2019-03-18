@@ -11,6 +11,19 @@ function ApiService($http, $location) {
             url: "/playlists"
         })
     }
+    self.getCategories = function () {
+        return $http({
+            method: "GET",
+            url: "/categories"
+        })
+    }
+    self.postCategory = function(data) {
+        $http({
+            method: "POST",
+            url: "/categories",
+            data: data
+        })
+    }
 
     // Posting a playlist
     self.editPlaylist = function (playlist) {
