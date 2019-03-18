@@ -18,7 +18,7 @@
 
   <div class="control_container">
     <!-- fas is filled in, far is not filled in -->
-    <i class="far fa-heart"></i>
+    <i class="far fa-heart" ng-click="$ctrl.favorited($ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack])"></i>
     <i ng-show="!$ctrl.play" class="fas fa-play" ng-click="$ctrl.togglePlay()"></i>
     <i ng-show="$ctrl.play" class="fas fa-pause" ng-click="$ctrl.togglePlay()"></i>
     <i class="fas fa-forward" ng-click="$ctrl.nextTrack()"></i>

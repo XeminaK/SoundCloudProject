@@ -141,6 +141,21 @@ function ApiService($http, $location) {
         return array;
     }
 
+    self.favASong = function (data) {
+        $http({
+            method: "POST",
+            url: "/favorites",
+            data: data
+        });
+    }
+
+    self.getFavs = function () {
+        return $http({
+            method: "GET",
+            url: "/favorites",
+        });
+    }
+
 }
 
 angular.module("App").service("ApiService", ApiService);

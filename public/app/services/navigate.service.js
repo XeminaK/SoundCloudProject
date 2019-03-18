@@ -11,6 +11,9 @@ function NavigateService($location) {
     self.toSettings = function() {
         $location.path("/settings");
     };
+    self.toFavorites = function() {
+        $location.path("/favorites");
+    };
 }
 
 angular.module("App").service("NavigateService", NavigateService);

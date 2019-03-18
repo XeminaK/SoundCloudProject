@@ -1,0 +1,13 @@
+<header></header>
+<div>
+    <div class="album_container">
+        <img src="{{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].artwork_url}}" alt="album art">
+    </div>
+
+    <div ng-click="$ctrl.play($index)" ng-repeat="favorite in $ctrl.favorites track by $index">
+        <img src="{{favorite.data.artwork_url}}" alt="favorite art">
+        <p>{{favorite.data.title}}</p>
+        <p>{{favorite.data.user.username}}</p>
+    </div>
+</div>
+<footer-component ng-show="$ctrl.startedMusic"></footer-component>

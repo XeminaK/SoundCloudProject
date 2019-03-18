@@ -82,8 +82,12 @@ const footerComponent = {
       vm.play = PlayerService.getPlayStatus();
       // if its true (something is playing) then continue the loop
       // i noticed that timers were playing from different durations so
+      if (vm.playFavorites) {
+
+      } else {
       let timersDuration = vm.tracks[vm.playlistIndex].data.data[vm.currentTrack].duration / 1000;
       let serviceDuration = PlayerService.tracks[PlayerService.playlistIndex].data.data[PlayerService.currentTrack].duration / 1000;
+      }
       // if a song is playing and the
       if (vm.play && timersDuration === serviceDuration) {
         vm.time = PlayerService.getTime();

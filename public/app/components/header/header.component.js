@@ -5,6 +5,10 @@ const header = {
   controller: ["NavigateService", "PlayerService", function(NavigateService, PlayerService) {
     const vm = this;
 
+    vm.goToFavs = function() {
+      NavigateService.toFavorites();
+    }
+
     vm.goHome = function() {
       NavigateService.toHome();
     }

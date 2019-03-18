@@ -14,6 +14,15 @@ function PlayerService($timeout) {
     self.stopped = null; // boolean
     self.activeTimer = false; // checks if there is an active timer in service.
     self.createMode = null;
+    self.track = null;
+    self.playFavorites = false;
+    self.favorites = []
+
+    self.playFavorite = function (index) {
+        self.currentTrack = index
+        self.playFavorites = true
+        self.startRadio(index)
+    }
 
     self.setData = function (data) {
         self.tracks = data;
@@ -24,7 +33,13 @@ function PlayerService($timeout) {
         console.log("stopped timer in player")
         self.currentTrack++;
         console.log(self.currentTrack)
-        SC.stream(`/tracks/${self.tracks[self.playlistIndex].data.data[self.currentTrack].id}`).then(function (player) {
+        if (self.playFavorites) {
+            self.track = self.favorites[self.currentTrack].data
+        } else {
+            self.track = self.tracks[self.playlistIndex].data.data[self.currentTrack]
+        }
+
+        SC.stream(`/tracks/${self.track.id}`).then(function (player) {
             self.player = player;
             player.play();
             self.play = true;
@@ -41,13 +56,17 @@ function PlayerService($timeout) {
         self.activeTimer = true;
         self.playlistIndex = playlistIndex;
         self.currentTrack = 0;
-        SC.stream(`/tracks/${self.tracks[self.playlistIndex].data.data[self.currentTrack].id}`).then(function (player) {
+        if (self.playFavorites) {
+            console.log(self.favorites[self.currentTrack].data)
+            self.track = self.favorites[self.currentTrack].data
+        } else {
+            self.track = self.tracks[self.playlistIndex].data.data[self.currentTrack]
+        }
+        console.log(self.track.id)
+        SC.stream(`/tracks/${self.track.id}`).then(function (player) {
             self.player = player;
             player.play();
             self.startedMusic = true;
-            // self.player.on('finish', function () {
-            //     self.nextTrack()
-            // })
         });
         self.play = true;
     }
@@ -96,7 +115,8 @@ function PlayerService($timeout) {
 
         self.time++;
         //logic
-        if (self.time < self.tracks[self.playlistIndex].data.data[self.currentTrack].duration/1000 ) {
+
+        if (self.time < self.track.duration/1000 ) {
             console.log(self.time)
             self.stopped = false;
             self.activeTimer = true;

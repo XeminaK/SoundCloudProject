@@ -22,10 +22,14 @@ nav {
   cursor: pointer;
 }
 
-.new_playlist {
-  display: flex;
+.favorites {
   position: absolute;
-  align-items: center;
+  right: 150px;
+  cursor: pointer;
+}
+
+.new_playlist {
+  position: absolute;
   padding: 10px 15px;
   right: 10px;
   background-color: #E65100;

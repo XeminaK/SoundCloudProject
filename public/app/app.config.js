@@ -13,5 +13,8 @@ angular
       .when("/settings", {
         template: "<settings></settings>"
       })
+      .when("/favorites", {
+        template: "<favorites></favorites>"
+      })
       .otherwise({ redirectTo: "/" });
   }]);

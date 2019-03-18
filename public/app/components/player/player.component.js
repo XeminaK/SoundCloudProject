@@ -2,7 +2,7 @@
 
 const player = {
   templateUrl: "app/components/player/player.html",
-  controller: ["PlayerService", "NavigateService", "$rootScope", "$timeout", function (PlayerService, NavigateService, $rootScope, $timeout) {
+  controller: ["ApiService", "PlayerService", "NavigateService", "$rootScope", "$timeout", function (ApiService, PlayerService, NavigateService, $rootScope, $timeout) {
     const vm = this;
     vm.play = null;
     vm.playlistIndex = 0;
@@ -78,6 +78,13 @@ const player = {
       console.log("stopped timer in player, next track")
       $timeout.cancel(vm.mytimeout);
       vm.mytimeout = $timeout(vm.startTimer, 1000);
+    }
+
+    vm.favorited = function(currentTrack) {
+      // ApiService.favASong(song);
+      console.log("Hi");
+      console.log(currentTrack);
+      ApiService.favASong(currentTrack);
     }
   }]
 }
