@@ -44,6 +44,20 @@ function ApiService($http, $location) {
       self.setTracks(tags[i]);
     }
   };
+  
+    self.getCategories = function () {
+        return $http({
+            method: "GET",
+            url: "/categories"
+        })
+    }
+    self.postCategory = function(data) {
+        $http({
+            method: "POST",
+            url: "/categories",
+            data: data
+        })
+    }
 
   self.setTracks = function(keyword) {
     SC.get("/tracks", {
