@@ -22,7 +22,6 @@ const home = {
         PlayerService.setData(result.data);
         console.log(vm.playlists);
       });
-      vm.getcolors();
     };
 
     // todo: nested ng-repeat
@@ -47,35 +46,6 @@ const home = {
       PlayerService.startRadio(index);
       $rootScope.$broadcast("play", PlayerService.play);
       vm.startedMusic = true;
-    };
-
-    vm.base64 = function(url, callback) {
-      // xml http request
-      var xhr = new XMLHttpRequest();
-      // on load calls the filereader api
-      xhr.onload = function() {
-        var reader = new FileReader();
-        reader.onloadend = function() {
-          callback(reader.result);
-        };
-        reader.readAsDataURL(xhr.response);
-      };
-      // sends get request to the url 
-      xhr.open("GET", url);
-      // requests the response as a blob
-      xhr.responseType = "blob";
-      xhr.send();
-    };
-
-    vm.getcolors = function() {
-      vm.base64("https://i1.sndcdn.com/artworks-000036981681-ewqqqv-t500x500.jpg", function(response) {
-        var img = document.getElementById("test");
-        img.setAttribute("src", response);
-        img.onload = function() {
-          var colorThief = new ColorThief();
-          console.log("YOOOOO", colorThief.getPalette(img, 8));
-        };
-      });
     };
   }]
 };

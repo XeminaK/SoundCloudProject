@@ -35,6 +35,10 @@ nav {
   cursor: pointer;
 }
 
+#test {
+  display: none;
+}
+
 .fa-plus {
   padding-right: 5px;
 }
