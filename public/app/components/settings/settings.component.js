@@ -11,7 +11,11 @@ const settings = {
     vm.categories = [];
 
     vm.$onInit = function () {
-      vm.categories = ApiService.getCategories();
+      ApiService.getCategories().then(function(result){
+        vm.categories = result.data
+        console.log(vm.categories)
+      })
+
       if (!PlayerService.createMode) {
         vm.tracks = PlayerService.tracks;
         vm.playlistIndex = PlayerService.playlistIndex;
@@ -24,12 +28,8 @@ const settings = {
     }
     vm.checkCategories = function (category) {
       for (let i = 0; i < vm.categories.length; i++) {
-        console.log(vm.categories[i].name)
-        console.log(category)
         if (vm.categories[i].name === category) {
-          
           return true;
-          
         }
       }
       return false;

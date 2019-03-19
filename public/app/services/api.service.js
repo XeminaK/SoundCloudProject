@@ -44,20 +44,21 @@ function ApiService($http, $location) {
       self.setTracks(tags[i]);
     }
   };
-  
-    self.getCategories = function () {
-        return $http({
-            method: "GET",
-            url: "/categories"
-        })
-    }
-    self.postCategory = function(data) {
-        $http({
-            method: "POST",
-            url: "/categories",
-            data: data
-        })
-    }
+
+  self.getCategories = function() {
+    return $http({
+      method: "GET",
+      url: "/categories"
+    });
+  };
+
+  self.postCategory = function(data) {
+    $http({
+      method: "POST",
+      url: "/categories",
+      data: data
+    });
+  };
 
   self.setTracks = function(keyword) {
     SC.get("/tracks", {
@@ -147,20 +148,15 @@ function ApiService($http, $location) {
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
     }
-    console.log(array);
     return array;
   };
 
   self.setColors = function(tracks) {
-    console.log(tracks);
     for (let i = 0; i < tracks.length; i++) {
-      console.log(tracks[i].artwork_url);
       if (tracks[i].artwork_url !== null) {
-        console.log("called from 145")
         self.getcolors(tracks[i].artwork_url);
       } else {
         self.colorCounter++;
-        console.log(self.colorCounter);
         if (self.colorCounter === tracks.length) {
           if (self.createMode) {
             self.colorCounter = 0;
@@ -177,24 +173,18 @@ function ApiService($http, $location) {
 
   self.getcolors = function(url) {
     // problem: if the last url is null it wont post
-    console.log(url);
     if (url !== null) {
       self.base64(url, function(response) {
-        console.log(response);
         var img = document.getElementById("test");
         img.setAttribute("src", response);
         self.colorCounter++;
-        console.log(self.colorCounter);
         img.onload = function() {
           var colorThief = new ColorThief();
-          console.log(colorThief.getPalette(img, 8));
           self.playlist.data.data[self.colorCounter].colors = colorThief.getPalette(img, 8);
         };
-        console.log(self.tracks.length);
         if (self.colorCounter === self.tracks.length) {
           if (self.createMode) {
             self.colorCounter = 0;
-            console.log(self.playlist);
             self.postPlaylist(self.playlist);
           } else {
             self.colorCounter = 0;
@@ -207,7 +197,6 @@ function ApiService($http, $location) {
       if (counter === self.tracks.length) {
         if (self.createMode) {
           self.colorCounter = 0;
-          console.log(self.playlist);
           self.postPlaylist(self.playlist);
         } else {
           self.colorCounter = 0;
@@ -219,7 +208,6 @@ function ApiService($http, $location) {
 
   self.base64 = function(url, callback) {
     // xml http request
-    console.log("called");
     var xhr = new XMLHttpRequest();
     // on load calls the filereader api
     xhr.onload = function() {
