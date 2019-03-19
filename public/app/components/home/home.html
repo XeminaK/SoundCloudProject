@@ -1,12 +1,14 @@
 <header></header>
 <div class="home_container">
-    <img id= "test" alt="">
-    <div ng-repeat="category in $ctrl.display">
-        <p>{{category.category}}</p>
-        <div class="home_album_cont" ng-click="$ctrl.startRadio(playlist.playlistIndex)" ng-repeat="playlist in category.playlists track by $index">
-            <p class="home_playlist_name">{{playlist.name}}</p>
-            <div class="album_gradient"></div>
-            <img class="home_album_art" src="{{playlist.data.data[0].artwork_url}}" alt="">
+    <img id="test" alt="">
+    <div class="category_container" ng-repeat="category in $ctrl.display">
+        <p id="category_name">{{category.category}}</p>
+        <div class="picture_container">
+            <div class="home_album_cont" ng-click="$ctrl.startRadio(playlist.playlistIndex)" ng-repeat="playlist in category.playlists track by $index">
+                <p class="home_playlist_name">{{playlist.name}}</p>
+                <div class="album_gradient"></div>
+                <img class="home_album_art" src="{{playlist.data.data[0].artwork_url}}" alt="">
+            </div>
         </div>
     </div>
 
