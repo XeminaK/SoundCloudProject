@@ -36,7 +36,37 @@ const player = {
         vm.stopped = true
       }
       PlayerService.setDefaultImage();
+      vm.changeBackground() 
     }
+
+    vm.changeBackground = function(){
+      let background = document.getElementsByClassName("player_container")
+      console.log(background)
+      let element = angular.element(background)
+      console.log(element)
+      let track = vm.tracks[vm.playlistIndex].data.data[vm.currentTrack]
+      console.log(track)
+      if (track.colors) {
+        track = track.colors
+        let color0 = `rgb(${track[0][0]},${track[0][1]},${track[0][2]})`;
+        let color1 = `rgb(${track[1][0]},${track[1][1]},${track[1][2]})`;
+        let color2 = `rgb(${track[2][0]},${track[2][1]},${track[2][2]})`;
+        let color3 = `rgb(${track[3][0]},${track[3][1]},${track[3][2]})`;
+        let color4 = `rgb(${track[4][0]},${track[4][1]},${track[4][2]})`;
+        let color5 = `rgb(${track[5][0]},${track[5][1]},${track[5][2]})`;
+        let color6 = `rgb(${track[6][0]},${track[6][1]},${track[6][2]})`;
+
+        element.css({
+          "background": `linear-gradient(130deg, ${color0}, ${color1}, ${color2}, ${color3}, ${color4}, ${color5}, ${color6}`,
+          "background-size": "1400% 1400%",
+          "animation": "AnimationName 30s ease infinite",
+        });
+      } else {
+        track = vm.tracks[vm.playlistIndex].data.data[vm.currentTrack]
+        console.log("no colors")
+      }
+    }
+
     vm.togglePlay = function() {
       vm.play = PlayerService.togglePlay();
       if(vm.stopped) {
@@ -49,6 +79,7 @@ const player = {
       vm.currentTrack++
       vm.play = true;
       vm.nextTimer();
+      vm.changeBackground();
       PlayerService.nextTrack();
     }
     vm.$onDestroy = function() {
