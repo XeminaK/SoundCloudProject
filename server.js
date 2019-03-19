@@ -12,6 +12,11 @@ app.use(express.json());
 app.use("/", categories);
 app.use("/", playlists);
 
-app.listen(8080, function() {
+const port = process.env.PORT || 8080;
+app.listen(port, function(){
   console.log("Server is running");
 })
+
+// app.listen(8080, function() {
+//   console.log("Server is running");
+// })
