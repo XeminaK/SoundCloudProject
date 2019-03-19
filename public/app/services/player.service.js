@@ -21,23 +21,17 @@ function PlayerService($timeout) {
     
     self.nextTrack = function () {
         self.clearInterval()
-        console.log("stopped timer in player")
         self.currentTrack++;
-        console.log(self.currentTrack)
         SC.stream(`/tracks/${self.tracks[self.playlistIndex].data.data[self.currentTrack].id}`).then(function (player) {
             self.player = player;
             player.play();
             self.play = true;
-            // self.player.on('finish', function () {
-            //     self.nextTrack()
-            // })
             self.nextTimer();
         });
     }
 
     self.startRadio = function (playlistIndex) {
         self.clearInterval()
-        console.log("cleared interval in start radio")
         self.activeTimer = true;
         self.playlistIndex = playlistIndex;
         self.currentTrack = 0;
@@ -45,15 +39,11 @@ function PlayerService($timeout) {
             self.player = player;
             player.play();
             self.startedMusic = true;
-            // self.player.on('finish', function () {
-            //     self.nextTrack()
-            // })
         });
         self.play = true;
     }
 
     self.pausePlayer = function() {
-        console.log("attempt to pause player")
         self.player.pause();
     }
 
@@ -76,11 +66,9 @@ function PlayerService($timeout) {
     }
 
     self.setDefaultImage = function () {
-        console.log("function ran")
         for (let j = 0; j < self.tracks.length; j++) {
             for (let i = 0; i < self.tracks[j].data.data.length; i++) {
                 if (self.tracks[j].data.data[i].artwork_url === null) {
-                    console.log("found null")
                     self.tracks[j].data.data[i].artwork_url = "app/images/cloudie_face.png"
                 }
             }
@@ -92,12 +80,9 @@ function PlayerService($timeout) {
     }
 
     self.startTimer = function () {
-        console.log("service")
-
         self.time++;
         //logic
         if (self.time < self.tracks[self.playlistIndex].data.data[self.currentTrack].duration/1000 ) {
-            console.log(self.time)
             self.stopped = false;
             self.activeTimer = true;
             self.mytimeout = $timeout(self.startTimer, 1000);
@@ -107,7 +92,6 @@ function PlayerService($timeout) {
     }
 
     self.pauseTimer = function () {
-        console.log("paused")
         $timeout.cancel(self.mytimeout);
         self.stopped = true;
         self.activeTimer = false

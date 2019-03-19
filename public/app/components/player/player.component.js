@@ -22,10 +22,13 @@ const player = {
 
     vm.$onInit = function () {
       vm.tracks = PlayerService.tracks;
+      console.log(vm.tracks)
       vm.currentTrack = PlayerService.currentTrack;
+      console.log(vm.currentTrack)
       vm.play = PlayerService.getPlayStatus();
       vm.time = PlayerService.getTime();
       vm.playlistIndex = PlayerService.playlistIndex;
+      console.log(vm.playlistIndex)
       if (PlayerService.checkTimer()) {
         vm.startTimer();
         console.log("timer exists")
@@ -37,29 +40,25 @@ const player = {
     vm.togglePlay = function() {
       vm.play = PlayerService.togglePlay();
       if(vm.stopped) {
-        console.log("play");
         vm.startTimer();
       } else {
-        console.log("pause");
         vm.pauseTimer();
       }
     }
     vm.nextTrack = function () {
-      vm.currentTrack++;
+      vm.currentTrack++
       vm.play = true;
       vm.nextTimer();
       PlayerService.nextTrack();
     }
     vm.$onDestroy = function() {
       $timeout.cancel(vm.mytimeout);
-      console.log("stopped timer on destroy in player")
     }
 
     vm.startTimer = function () {
       vm.time = PlayerService.getTime();
       //logic
       if (vm.time < vm.tracks[vm.playlistIndex].data.data[vm.currentTrack].duration / 1000) {
-        console.log(vm.time)
         vm.stopped = false;
         vm.mytimeout = $timeout(vm.startTimer, 1000);
       } else {
@@ -75,7 +74,6 @@ const player = {
 
     vm.nextTimer = function () {
       vm.time = 0;
-      console.log("stopped timer in player, next track")
       $timeout.cancel(vm.mytimeout);
       vm.mytimeout = $timeout(vm.startTimer, 1000);
     }

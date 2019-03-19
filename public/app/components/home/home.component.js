@@ -11,12 +11,8 @@ const home = {
     vm.$onInit = function() {
       vm.startedMusic = PlayerService.checkMusic();
       ApiService.getPlaylists().then(function(result) {
-        for (let i = 0; i < result.data.length; i++) {
-          result.data[i].data.data = ApiService.shuffle(result.data[i].data.data);
-          vm.playlists = result.data;
-          PlayerService.tracks = vm.playlists;
-          PlayerService.setDefaultImage();
-        }
+        vm.playlists = result.data;
+        PlayerService.setDefaultImage();
         PlayerService.setData(result.data);
         ApiService.getCategories().then(function(result) {
           vm.categories = result.data;
@@ -39,7 +35,6 @@ const home = {
           }
         }
       }
-      console.log(vm.display);
     }
 
     vm.startRadio = function(index) {

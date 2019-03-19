@@ -66,6 +66,7 @@ function ApiService($http, $location) {
       limit: 15
     }).then(function(tracks) {
       self.tracks = self.tracks.concat(tracks);
+      self.shuffle(self.tracks);
       console.log(self.tracks);
       self.count++;
       if (self.count === self.playlist.tags.length) {
@@ -110,6 +111,7 @@ function ApiService($http, $location) {
       url: "/playlists",
       data: data
     }).then(function() {
+
       $location.path("/home");
     });
   };
