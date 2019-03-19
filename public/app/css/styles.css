@@ -51,6 +51,7 @@ footer {
   bottom: 0;
   background-color: #212121;
   height: 100px;
+  z-index: 1000;
 }
 
 .album_art_container {
