@@ -9,6 +9,7 @@ const home = {
     vm.display = [];
 
     vm.$onInit = function() {
+      PlayerService.createMode = true;
       vm.startedMusic = PlayerService.checkMusic();
       ApiService.getPlaylists().then(function(result) {
         vm.playlists = result.data;

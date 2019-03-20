@@ -21,6 +21,7 @@ const player = {
     }
 
     vm.$onInit = function () {
+      PlayerService.createMode = true;
       vm.tracks = PlayerService.tracks;
       console.log(vm.tracks)
       vm.currentTrack = PlayerService.currentTrack;

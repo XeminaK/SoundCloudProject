@@ -383,11 +383,22 @@ tags-input .tags {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
 }
 
 .popup_contents button {
   background-color:  #E65100;
   width: 80%;
+  padding: 10px 15px;
+  right: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: white;
+  border-radius: 10px;
+}
+
 }
 
 @-webkit-keyframes AnimationName {

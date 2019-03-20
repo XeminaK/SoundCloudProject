@@ -21,6 +21,7 @@ const settings = {
     }
 
     vm.$onInit = function () {
+      vm.createMode = PlayerService.createMode;
       ApiService.getCategories().then(function(result){
         vm.categories = result.data
         console.log(vm.categories)
