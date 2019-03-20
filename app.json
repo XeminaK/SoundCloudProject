@@ -1,0 +1,5 @@
+{
+  "name": "Cloudie",
+  "description": "soundcloud API application",
+  "image": "heroku/nodejs"
+}
