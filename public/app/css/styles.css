@@ -430,3 +430,9 @@ tags-input .tags {
     font-size: 30px;
   }
 }
+
+@media only  screen and (max-width: 780px) {
+  .input_containers {
+    width: 80vw;
+  }
+}
