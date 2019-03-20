@@ -65,6 +65,7 @@ function ApiService($http, $location) {
       q: `${keyword}`,
       limit: 15
     }).then(function(tracks) {
+      tracks = self.stripTracks(tracks)
       self.tracks = self.tracks.concat(tracks);
       self.shuffle(self.tracks);
       console.log(self.tracks);
@@ -77,6 +78,22 @@ function ApiService($http, $location) {
       }
     });
   };
+
+  self.stripTracks = function(tracks) {
+    let newTracks = []
+    for (let i = 0; i<tracks.length; i++) {
+      newTracks.push({
+        artwork_url: tracks[i].artwork_url,
+        title: tracks[i].title,
+        id: tracks[i].id,
+        duration: tracks[i].duration,
+        user: {
+          username: tracks[i].user.username
+        }
+      })
+    }
+    return newTracks
+  }
 
   self.convertToHighRes = function(tracks) {
     let img = null;
