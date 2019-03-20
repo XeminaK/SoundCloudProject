@@ -134,12 +134,13 @@ align-items: center;
 }
 
 .album_container {
-  height: 55%;
+  height: 50%;
   /* border: solid 1px green; */
   width: 65vw;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: -30px 0 -10px 0;
 }
 
 .album_container img {
@@ -165,18 +166,19 @@ align-items: center;
 }
 
 .control_container {
-height: 10%;
-/* border: solid 1px purple; */
-width: 60vw;
-display: flex;
-justify-content: space-between;
-align-items: center;
+  height: 10%;
+  padding-top: 40px;
+  width: 60vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .fa-heart {
   font-size: 48px;
   color: white; 
-  text-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  /* text-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); */
+  opacity: 0;
 }
 
 .footer_control {
