@@ -10,7 +10,14 @@
             <!-- <p>Model: {{$ctrl.playlist.tags}}</p> -->
             <button class="save_button_settings">SAVE</button>
         </form>
-            <button ng-click="$ctrl.deletePlaylist($ctrl.playlist);" class="delete_button">Delete Playlist</button>
+        <button ng-click="$ctrl.deletePlaylist($ctrl.playlist);" class="delete_button">Delete Playlist</button>
     </div>
-    <img id="test" alt="">
+</div>
+<img id="test" alt="">
+
+<div class="popup" ng-show="($ctrl.show)">
+    <div class="popup_contents">
+        <p>Press Save First</p>
+        <button ng-click="$ctrl.toFalse()">Okay</button>
+    </div>
 </div>

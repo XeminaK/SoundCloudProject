@@ -2,16 +2,21 @@
 
 const header = {
   templateUrl: "app/components/header/header.html",
-  controller: ["NavigateService", "PlayerService", function(NavigateService, PlayerService) {
+  controller: ["NavigateService", "PlayerService", "$rootScope", function(NavigateService, PlayerService, $rootScope) {
     const vm = this;
 
     vm.goHome = function() {
-      NavigateService.toHome();
+        NavigateService.toHome();
     }
 
     vm.newPlaylist = function () {
-      PlayerService.createMode = true;
-      NavigateService.toSettings();
+      if(PlayerService.createMode === false){
+        $rootScope.$broadcast("popup", PlayerService.popup);
+      }
+      else {
+        PlayerService.createMode = true;
+        NavigateService.toSettings();
+      }
     }
 
   }]

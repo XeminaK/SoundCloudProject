@@ -2,13 +2,23 @@
 
 const settings = {
   templateUrl: "app/components/settings/settings.html",
-  controller: ["NavigateService", "ApiService", "PlayerService", function (NavigateService, ApiService, PlayerService) {
+  controller: ["NavigateService", "ApiService", "PlayerService", "$rootScope", function (NavigateService, ApiService, PlayerService, $rootScope) {
     const vm = this;
     vm.tagsArray = [];
     vm.playlistIndex = null;
     vm.playlist = {};
     vm.tracks = null;
     vm.categories = [];
+    vm.show = false;
+
+    $rootScope.$on("popup", function (event, data) {
+      console.log("popup");
+      vm.show = true;
+    });
+
+    vm.toFalse = function() {
+      vm.show = false;
+    }
 
     vm.$onInit = function () {
       ApiService.getCategories().then(function(result){
