@@ -6,7 +6,7 @@ const app = express();
 const categories = require("./routes/categories.routes");
 const playlists = require("./routes/playlists.routes");
 
-app.use(express.urlencoded({ parameterLimit: 100000, limit: "50mb", extended: true }));
+app.use(express.urlencoded({ parameterLimit: 100000000, limit: "50mb", extended: true }));
 app.use(express.static("./public"));
 app.use(express.json());
 
