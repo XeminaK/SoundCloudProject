@@ -134,7 +134,7 @@ align-items: center;
 }
 
 .album_container {
-  height: 55%;
+  height: 50%;
   /* border: solid 1px green; */
   width: 65vw;
   display: flex;
@@ -165,12 +165,12 @@ align-items: center;
 }
 
 .control_container {
-height: 10%;
-/* border: solid 1px purple; */
-width: 60vw;
-display: flex;
-justify-content: space-between;
-align-items: center;
+  height: 10%;
+  padding-top: 40px;
+  width: 60vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .fa-heart {
