@@ -3,7 +3,7 @@
   <div class="album_art_container">
     <img class="album_art" ng-click="$ctrl.goToPlayer()" src="{{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].artwork_url}}" alt="album art">
   </div>
-  <div class="artist_info_container">
+  <div class="artist_info_container" ng-click="$ctrl.goToPlayer()">
     <div class="wrapper">
       <p class="artist_info" ng-click="$ctrl.goToPlayer()">{{$ctrl.tracks[$ctrl.playlistIndex].data.data[$ctrl.currentTrack].title}} </p>
 

@@ -357,8 +357,37 @@ tags-input .tags {
   padding: 16px 8px !important;
   margin-bottom: 16px;
 }
+
 #mycanvas {
   z-index: 100000;
+}
+
+.popup {
+  background-color:rgba(0, 0, 0, 0.5);
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+}
+
+.popup_contents {
+  background-color: white;
+  width: 50%;
+  height: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup_contents button {
+  background-color:  #E65100;
+  width: 80%;
 }
 
 @-webkit-keyframes AnimationName {
